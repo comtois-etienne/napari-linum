@@ -1,0 +1,37 @@
+# run: conda env create -f environment.yml
+# install segment-anything with the conda's pip
+# pip install git+https://github.com/facebookresearch/segment-anything.git
+# /Applications/anaconda3/envs/uav_tc/bin/pip install git+https://github.com/facebookresearch/segment-anything.git
+
+name: napari_linum
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.10
+  - tensorflow
+  - scikit-image
+  - scikit-learn
+  - pandas
+  - opencv
+  - jupyterlab
+  - matplotlib
+  - pytorch
+  - pip
+  - git
+  - torchvision
+  - exifread
+  - gdal
+  - seaborn
+  - geopandas
+  - plotly
+  - zarr
+  # pip dependencies
+  # - segment-anything
+  # - napari # conda install -c conda-forge napari pyqt
+  # - napari-segment-anything
+  # - cookiecutter
+prefix: /Applications/anaconda3/envs/napari_linum
+
+# to install napari-linum plugin
+# /opt/anaconda3/envs/napari_linum/bin/pip install -e .
