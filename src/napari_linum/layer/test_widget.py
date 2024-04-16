@@ -29,6 +29,11 @@ class TestWidget(LayerManipulator):
         print('Test Button Pressed')
         print(self._source_layer.value)
         print(type(self._source_layer.value))
-        print(self._source_layer.value.data)
+        # print(self._source_layer.value.data)
         print(self._source_layer.value.data.shape)
+        # print(self._source_layer.value.data.dtype)
+        print(type(self._source_layer.value.data))
+        # print min max
+        print('Min:', np.min(self._source_layer.value.data))
+        print('Max:', np.max(self._source_layer.value.data))
 
