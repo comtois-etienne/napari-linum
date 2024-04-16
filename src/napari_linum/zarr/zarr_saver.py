@@ -32,8 +32,8 @@ def compress_zarr(zarr_arr, method):
         compressor = numcodecs.Zstd(level=1)
     elif method == "lz4":
         compressor = numcodecs.LZ4(level=1)
-    elif method.startswith("blosc:"):
-        blosc_method = method.split(":")[1]
+    elif method.startswith("blosc-"):
+        blosc_method = method.split("-")[1]
         compressor = numcodecs.Blosc(cname=blosc_method, clevel=5, shuffle=numcodecs.Blosc.SHUFFLE)
     else:
         raise ValueError(f"Unsupported compression method: {method}")
@@ -58,7 +58,7 @@ class ZarrSaver(LinumWidget):
 
         self._compression = ComboBox(
             label="Compression",
-            choices=["none", "gzip", "zstd", "lz4"] + [f"blosc:{x}" for x in numcodecs.blosc.list_compressors()],
+            choices=["none", "gzip", "zstd", "lz4"] + [f"blosc-{x}" for x in numcodecs.blosc.list_compressors()],
             value="gzip",
         )
 
@@ -78,6 +78,7 @@ class ZarrSaver(LinumWidget):
             ]
         )
 
+    # todo: remove extension of the given path and add .zarr | .omezarr
     def _save_zarr(self):
         data = self._source_layer.value.data
 
