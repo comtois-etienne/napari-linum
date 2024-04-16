@@ -1,10 +1,10 @@
 # napari-linum
 
-[![License BSD-3](https://img.shields.io/pypi/l/napari-linum.svg?color=green)](https://github.com/comtois.etienne@outlook.com/napari-linum/raw/main/LICENSE)
+[![License BSD-3](https://img.shields.io/pypi/l/napari-linum.svg?color=green)](https://github.com/comtois-etienne/napari-linum/raw/main/LICENSE)
 [![PyPI](https://img.shields.io/pypi/v/napari-linum.svg?color=green)](https://pypi.org/project/napari-linum)
 [![Python Version](https://img.shields.io/pypi/pyversions/napari-linum.svg?color=green)](https://python.org)
-[![tests](https://github.com/comtois.etienne@outlook.com/napari-linum/workflows/tests/badge.svg)](https://github.com/comtois.etienne@outlook.com/napari-linum/actions)
-[![codecov](https://codecov.io/gh/comtois.etienne@outlook.com/napari-linum/branch/main/graph/badge.svg)](https://codecov.io/gh/comtois.etienne@outlook.com/napari-linum)
+[![tests](https://github.com/comtois-etienne/napari-linum/workflows/tests/badge.svg)](https://github.com/comtois-etienne/napari-linum/actions)
+[![codecov](https://codecov.io/gh/comtois-etienne/napari-linum/branch/main/graph/badge.svg)](https://codecov.io/gh/comtois-etienne/napari-linum)
 [![napari hub](https://img.shields.io/endpoint?url=https://api.napari-hub.org/shields/napari-linum)](https://napari-hub.org/plugins/napari-linum)
 
 plugin for zarr file format segmentation
@@ -31,7 +31,7 @@ You can install `napari-linum` via [pip]:
 
 To install latest development version :
 
-    pip install git+https://github.com/comtois.etienne@outlook.com/napari-linum.git
+    pip install git+https://github.com/comtois-etienne/napari-linum.git
 
 
 ## Contributing
@@ -59,7 +59,7 @@ If you encounter any problems, please [file an issue] along with a detailed desc
 [Mozilla Public License 2.0]: https://www.mozilla.org/media/MPL/2.0/index.txt
 [cookiecutter-napari-plugin]: https://github.com/napari/cookiecutter-napari-plugin
 
-[file an issue]: https://github.com/comtois.etienne@outlook.com/napari-linum/issues
+[file an issue]: https://github.com/comtois-etienne/napari-linum/issues
 
 [napari]: https://github.com/napari/napari
 [tox]: https://tox.readthedocs.io/en/latest/
