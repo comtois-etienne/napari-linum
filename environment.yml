@@ -31,8 +31,10 @@ dependencies:
   # - segment-anything
   # - napari # conda install -c conda-forge napari pyqt
   # - napari-segment-anything
+  # - napari-ome-zarr
   # - cookiecutter
 prefix: /Applications/anaconda3/envs/napari_linum
 
 # to install napari-linum plugin
 # /opt/anaconda3/envs/napari_linum/bin/pip install -e .
+# /opt/anaconda3/envs/napari_linum/bin/pip install napari-ome-zarr
