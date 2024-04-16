@@ -7,7 +7,10 @@ from .layer import (
     TestWidget,
 )
 
-from .zarr import ZarrLoader
+from .zarr import (
+    ZarrLoader,
+    ZarrSaver,
+)
 
 __all__ = (
     "LabelsLayerManipulator",
@@ -15,4 +18,5 @@ __all__ = (
     "PointsLayerManipulator",
     "TestWidget",
     "ZarrLoader",
+    "ZarrSaver",
 )

@@ -21,6 +21,9 @@ contributions:
     - id: napari-linum.zarr_loader_widget
       python_name: napari_linum:ZarrLoader
       title: Zarr File Loader
+    - id: napari-linum.zarr_saver_widget
+      python_name: napari_linum:ZarrSaver
+      title: Zarr File Saver
   widgets:
     - command: napari-linum.labels_layer_manipulator_widget
       display_name: Labels Layer Manipulation Tools
@@ -32,4 +35,5 @@ contributions:
       display_name: Test Widget
     - command: napari-linum.zarr_loader_widget
       display_name: Zarr File Loader
-
+    - command: napari-linum.zarr_saver_widget
+      display_name: Zarr File Saver
