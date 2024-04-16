@@ -1,0 +1,30 @@
+name: napari-linum
+display_name: linum tools for segmentation
+# use 'hidden' to remove plugin from napari hub search results
+visibility: public
+# see https://napari.org/stable/plugins/manifest.html for valid categories
+categories: ["Annotation", "Segmentation", "Acquisition"]
+contributions:
+  commands:
+    - id: napari-linum.labels_layer_manipulator_widget
+      python_name: napari_linum:LabelsLayerManipulator
+      title: Labels Layer Manipulation Tools
+    - id: napari-linum.shapes_layer_manipulator_widget
+      python_name: napari_linum:ShapesLayerManipulator
+      title: Shapes Layer Manipulation Tools
+    - id: napari-linum.points_layer_manipulator_widget
+      python_name: napari_linum:PointsLayerManipulator
+      title: Points Layer Manipulation Tools
+    - id: napari-linum.zarr_loader_widget
+      python_name: napari_linum:ZarrLoader
+      title: Zarr File Loader
+  widgets:
+    - command: napari-linum.labels_layer_manipulator_widget
+      display_name: Labels Layer Manipulation Tools
+    - command: napari-linum.shapes_layer_manipulator_widget
+      display_name: Shapes Layer Manipulation Tools
+    - command: napari-linum.points_layer_manipulator_widget
+      display_name: Points Layer Manipulation Tools
+    - command: napari-linum.zarr_loader_widget
+      display_name: Zarr File Loader
+
