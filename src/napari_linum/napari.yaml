@@ -15,6 +15,9 @@ contributions:
     - id: napari-linum.points_layer_manipulator_widget
       python_name: napari_linum:PointsLayerManipulator
       title: Points Layer Manipulation Tools
+    - id: napari-linum.test_widget
+      python_name: napari_linum:TestWidget
+      title: Test Widget
     - id: napari-linum.zarr_loader_widget
       python_name: napari_linum:ZarrLoader
       title: Zarr File Loader
@@ -25,6 +28,8 @@ contributions:
       display_name: Shapes Layer Manipulation Tools
     - command: napari-linum.points_layer_manipulator_widget
       display_name: Points Layer Manipulation Tools
+    - command: napari-linum.test_widget
+      display_name: Test Widget
     - command: napari-linum.zarr_loader_widget
       display_name: Zarr File Loader
 

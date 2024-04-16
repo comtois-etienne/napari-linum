@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 from magicgui.widgets import CheckBox, Container, create_widget, PushButton, EmptyWidget, Label, FileEdit, FloatSpinBox
-import bak.zarr as zarr
+import zarr
 import numpy as np
 from os import path
 
