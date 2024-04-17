@@ -49,10 +49,11 @@ class ZarrSaver(LinumWidget):
             label="Source :", annotation="napari.layers.Layer"
         )
         self._zarr_path = FileEdit(label="Save Directory", mode='d')
+        self._save_path = None
 
         self._format = ComboBox(
             label="Format",
-            choices=["zarr", "ome-zarr"],
+            choices=["zarr", "omezarr"],
             value="zarr",
         )
 
@@ -65,7 +66,7 @@ class ZarrSaver(LinumWidget):
         self._overwrite = CheckBox(text="Overwrite", value=False)
 
         self._save_button = PushButton(text="Save Layer")
-        self._save_button.changed.connect(self._save_zarr)
+        self._save_button.changed.connect(self._save)
 
         self.extend(
             [
@@ -78,23 +79,46 @@ class ZarrSaver(LinumWidget):
             ]
         )
 
-    # todo: remove extension of the given path and add .zarr | .omezarr
-    def _save_zarr(self):
-        data = self._source_layer.value.data
-
+    def _update_path(self):
+        layer_name = str(self._source_layer.value.name)
         zarr_path = str(self._zarr_path.value)
-        if not zarr_path.endswith('.zarr'):
-            layer_name = self._source_layer.value.name
-            zarr_path = path.join(zarr_path, f'{layer_name}.zarr')
+        current_ext = path.splitext(zarr_path)[1]
+        zarr_path = zarr_path[:len(zarr_path)-len(current_ext)]
+        if not zarr_path.endswith(layer_name):
+            zarr_path = path.join(zarr_path, f'{layer_name}')
+        self._save_path = f'{zarr_path}.{str(self._format.value)}'
 
-        if not self._overwrite.value and not is_dir_empty(zarr_path):
+    def _save(self):
+        self._clear_message()
+        self._update_path()
+
+        if not self._overwrite.value and not is_dir_empty(self._save_path):
             self._update_message('File already exists. Enable overwrite to save.')
             return
 
         self._update_message('Saving Zarr file...')
+        try:
+            ext = str(self._format.value)
+            if ext == "zarr":
+                self._save_zarr()
+            elif ext == "omezarr":
+                # throw not implemented error
+                self._save_omezarr()
+                raise NotImplementedError
+        except Exception as e:
+            self._update_message('Error saving file')
+            print(e)
+            return
+        self._update_message('Zarr file saved')
+
+    # todo: remove extension of the given path and add .zarr | .omezarr
+    def _save_zarr(self):
+        data = self._source_layer.value.data
         z = zarr.zeros(shape=data.shape, dtype=data.dtype)
         z[:] = data
         z = compress_zarr(z, self._compression.value)
-        zarr.save(zarr_path, z)
-        self._update_message('Zarr file saved')
+        zarr.save(self._save_path, z)
+
+    def _save_omezarr(self):
+        pass
 
