@@ -24,7 +24,6 @@ class ZarrLoader(LinumWidget):
         super().__init__(viewer)
         self._zarr_path = FileEdit(label="Zarr Path", mode='d')
         self._resolution = FloatSpinBox(label="Resolution (um)", value=10.0)
-        self._zarr = None
 
         self._type = ComboBox(
             label="Type",
