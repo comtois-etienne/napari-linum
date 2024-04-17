@@ -44,8 +44,7 @@ class ZarrLoader(LinumWidget):
         )
 
     def _scale(self):
-        res = self._resolution.value
-        return (res, res, res)
+        return [self._resolution.value] * 3
 
     def _load(self):
         self._clear_message()
