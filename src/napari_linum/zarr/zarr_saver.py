@@ -7,6 +7,8 @@ import numpy as np
 import os
 from os import path
 
+from .linumpy_zarr import save_zarr
+
 from ..widget import LinumWidget
 
 if TYPE_CHECKING:
@@ -102,16 +104,13 @@ class ZarrSaver(LinumWidget):
             if ext == "zarr":
                 self._save_zarr()
             elif ext == "omezarr":
-                # throw not implemented error
                 self._save_omezarr()
-                raise NotImplementedError
         except Exception as e:
             self._update_message('Error saving file')
             print(e)
             return
         self._update_message('Zarr file saved')
 
-    # todo: remove extension of the given path and add .zarr | .omezarr
     def _save_zarr(self):
         data = self._source_layer.value.data
         z = zarr.zeros(shape=data.shape, dtype=data.dtype)
@@ -120,5 +119,8 @@ class ZarrSaver(LinumWidget):
         zarr.save(self._save_path, z)
 
     def _save_omezarr(self):
-        pass
+        data = self._source_layer.value.data
+        resolution = self._source_layer.value.scale[0]
+        scales = [resolution * 1e-3] * 3  # convert to mm
+        save_zarr(data, self._save_path, scales=scales, overwrite=self._overwrite.value)
 
