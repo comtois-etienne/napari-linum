@@ -105,7 +105,7 @@ class ZarrSaver(LinumWidget):
         self._clear_message()
         self._update_path()
 
-        if get_layer_by_name(self._viewer, self._source_layer.value) is None:
+        if self._source_layer.value != 'all' and get_layer_by_name(self._viewer, self._source_layer.value) is None:
             self._update_message('Layer not found - Please Refresh')
             return
 
@@ -113,7 +113,6 @@ class ZarrSaver(LinumWidget):
             self._update_message('File already exists. Enable overwrite to save.')
             return
 
-        self._update_message('Saving Zarr file...')
         try:
             ext = str(self._format.value)
             if ext == "zarr":
