@@ -49,7 +49,11 @@ def add_points_to_labels(points, labels):
     return labels
 
 
-def get_layers(viewer: napari.Viewer, layer_types: list):
+def get_layer_type(layer):
+    return type(layer).__name__.lower().split('.')[-1]
+
+
+def get_layers(viewer: napari.Viewer, layer_types: list = ['image', 'labels', 'points', 'shapes', 'surface', 'tracks', 'vectors']):
     def get_layers_of_type(viewer: napari.Viewer, layer_type: str):
         layer_class = getattr(napari.layers, layer_type.capitalize(), None)
         if layer_class is not None:
