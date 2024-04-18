@@ -6,10 +6,16 @@ import numcodecs
 import numpy as np
 import os
 from os import path
+from napari.layers import Image, Labels
 
 from linumpy.io.zarr import save_zarr
 
 from ..widget import LinumWidget
+
+from ..layer.layer_utils import (
+    get_layers,
+    get_layer_by_name,
+)
 
 if TYPE_CHECKING:
     import napari
@@ -47,8 +53,10 @@ class ZarrSaver(LinumWidget):
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
 
-        self._source_layer = create_widget(
-            label="Source :", annotation="napari.layers.Layer"
+        self._source_layer = ComboBox(
+            label="Source",
+            choices=["all"] + get_layers(viewer, ["image", "labels"]),
+            value="all",
         )
         self._zarr_path = FileEdit(label="Save Directory", mode='d')
         self._save_path = None
@@ -81,8 +89,11 @@ class ZarrSaver(LinumWidget):
             ]
         )
 
+    def _on_refresh(self):
+        self._source_layer.choices = ["all"] + get_layers(self._viewer, ["image", "labels"])
+
     def _update_path(self):
-        layer_name = str(self._source_layer.value.name)
+        layer_name = str(self._source_layer.value)
         zarr_path = str(self._zarr_path.value)
         current_ext = path.splitext(zarr_path)[1]
         zarr_path = zarr_path[:len(zarr_path)-len(current_ext)]
@@ -93,6 +104,10 @@ class ZarrSaver(LinumWidget):
     def _save(self):
         self._clear_message()
         self._update_path()
+
+        if get_layer_by_name(self._viewer, self._source_layer.value) is None:
+            self._update_message('Layer not found - Please Refresh')
+            return
 
         if not self._overwrite.value and not is_dir_empty(self._save_path):
             self._update_message('File already exists. Enable overwrite to save.')
@@ -112,15 +127,18 @@ class ZarrSaver(LinumWidget):
         self._update_message('Zarr file saved')
 
     def _save_zarr(self):
-        data = self._source_layer.value.data
+        data = get_layer_by_name(self._viewer, self._source_layer.value).data
         z = zarr.zeros(shape=data.shape, dtype=data.dtype)
         z[:] = data
         z = compress_zarr(z, self._compression.value)
         zarr.save(self._save_path, z)
 
     def _save_omezarr(self):
-        data = self._source_layer.value.data
+        data = get_layer_by_name(self._viewer, self._source_layer.value).data
         resolution = self._source_layer.value.scale[0]
         scales = [resolution * 1e-3] * 3  # convert to mm
         save_zarr(data, self._save_path, scales=scales, overwrite=self._overwrite.value)
+
+    # def _save_linumzarr(self):
+        
 

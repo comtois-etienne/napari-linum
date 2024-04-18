@@ -61,6 +61,13 @@ def get_layers(viewer: napari.Viewer, layer_types: list):
     return layers
 
 
+def get_layer_by_name(viewer: napari.Viewer, layer_name: str):
+    for layer in viewer.layers:
+        if str(layer.name) == str(layer_name):
+            return layer
+    return None
+
+
 def shapes_to_labels(viewer: napari.Viewer, shapes: napari.layers.Shapes):
     layers = get_layers(viewer, ['labels', 'image'])
     shape = layers[0].data.shape
