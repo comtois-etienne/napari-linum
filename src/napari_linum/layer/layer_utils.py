@@ -19,10 +19,19 @@ def label_array(array):
     return array
 
 
-def reindex_labels(array):
+def _reindex_labels(array):
     _, inverse = np.unique(array, return_inverse=True)
     new_arr = inverse.reshape(array.shape)
     return new_arr
+
+
+def reindex_labels(array):
+    if len(array.shape) == 3:
+        for i in range(array.shape[0]):
+            array[i] = _reindex_labels(array[i])
+    else:
+        array = _reindex_labels(array)
+    return array
 
 
 def add_labels(source_layer: np.array, output_layer: np.array):
