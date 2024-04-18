@@ -7,7 +7,7 @@ import numpy as np
 import os
 from os import path
 
-from .linumpy_zarr import save_zarr
+from linumpy.io.zarr import save_zarr
 
 from ..widget import LinumWidget
 
