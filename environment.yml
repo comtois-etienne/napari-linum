@@ -34,6 +34,7 @@ dependencies:
   # - napari-ome-zarr
   # - cookiecutter
   # - linumpy
+  # - napari-linum
 prefix: /Applications/anaconda3/envs/napari_linum
 
 # to install napari-linum plugin
