@@ -1,5 +1,6 @@
 from scipy.ndimage import label
 import numpy as np
+import napari
 
 
 def binarize_array(array):
@@ -33,4 +34,24 @@ def add_points_to_labels(points, labels):
     current = np.max(labels) + 1
     labels[points[:, 0], points[:, 1]] = np.arange(current, current + len(points))
     return labels
+
+
+def get_layers(viewer: napari.Viewer, layer_types: list):
+    def get_layers_of_type(viewer: napari.Viewer, layer_type: str):
+        layer_class = getattr(napari.layers, layer_type.capitalize(), None)
+        if layer_class is not None:
+            return [layer for layer in viewer.layers if isinstance(layer, layer_class)]
+        return []
+    layers = []
+    for layer_type in layer_types:
+        layers.extend(get_layers_of_type(viewer, layer_type))
+    return layers
+
+
+def shapes_to_labels(viewer: napari.Viewer, shapes: napari.layers.Shapes):
+    layers = get_layers(viewer, ['labels', 'image'])
+    shape = layers[0].data.shape
+    raster = shapes.to_labels()
+    raster = np.pad(raster, ((0, shape[0] - raster.shape[0]), (0, shape[1] - raster.shape[1])), constant_values=0)
+    return raster
 

@@ -6,6 +6,7 @@ import numpy as np
 from ..manipulator import LayerManipulator
 
 from ..layer_utils import (
+    shapes_to_labels,
     add_labels,
 )
 
@@ -37,10 +38,7 @@ class ShapesLayerManipulator(LayerManipulator):
             "Output must be a Labels layer"): 
             return
         self._save_data('Rasterize')
-        shapes = self._source_layer.value
-        raster = shapes.to_labels()
-        shape = self._output_layer.value.data.shape
-        raster = np.pad(raster, ((0, shape[0] - raster.shape[0]), (0, shape[1] - raster.shape[1])), constant_values=0)
+        raster = shapes_to_labels(self._viewer, self._source_layer.value)
         result = add_labels(raster, self._output_layer.value.data)
         self._save_output(result)
 
