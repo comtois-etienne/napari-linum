@@ -11,8 +11,12 @@ def binarize_array(array):
 
 def label_array(array):
     array = binarize_array(array)
-    labeled_array, _ = label(array)
-    return labeled_array
+    if len(array.shape) == 3:
+        for i in range(array.shape[0]):
+            array[i], _ = label(array[i])
+    else:
+        array, _ = label(array)
+    return array
 
 
 def reindex_labels(array):
