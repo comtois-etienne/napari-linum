@@ -1,7 +1,7 @@
-from .zarr_loader import ZarrLoader
-from .zarr_saver import ZarrSaver
+from .reader import ZarrReader
+from .writer import ZarrWriter
 
 __all__ = (
-    "ZarrLoader",
-    "ZarrSaver",
+    "ZarrReader",
+    "ZarrWriter",
 )

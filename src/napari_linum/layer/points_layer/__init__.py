@@ -1,4 +1,4 @@
-from .manipulator import PointsLayerManipulator
+from .converter import PointsLayerConverter
 
 
-__all__ = ["PointsLayerManipulator"]
+__all__ = ["PointsLayerConverter"]

@@ -6,34 +6,39 @@ visibility: public
 categories: ["Annotation", "Segmentation", "Acquisition"]
 contributions:
   commands:
-    - id: napari-linum.labels_layer_manipulator_widget
-      python_name: napari_linum:LabelsLayerManipulator
-      title: Labels Layer Manipulation Tools
-    - id: napari-linum.shapes_layer_manipulator_widget
-      python_name: napari_linum:ShapesLayerManipulator
-      title: Shapes Layer Manipulation Tools
-    - id: napari-linum.points_layer_manipulator_widget
-      python_name: napari_linum:PointsLayerManipulator
-      title: Points Layer Manipulation Tools
+    - id: napari-linum.labels_layer_converter_widget
+      python_name: napari_linum:LabelsLayerConverter
+      title: Labels Layer Converter Tools
+    - id: napari-linum.shapes_layer_converter_widget
+      python_name: napari_linum:ShapesLayerConverter
+      title: Shapes Layer Converter Tools
+    - id: napari-linum.points_layer_converter_widget
+      python_name: napari_linum:PointsLayerConverter
+      title: Points Layer Converter Tools
+    - id: napari-linum.ortho_reader_widget
+      python_name: napari_linum:OrthoReader
+      title: Orthophoto Reader
     - id: napari-linum.test_widget
       python_name: napari_linum:TestWidget
       title: Test Widget
-    - id: napari-linum.zarr_loader_widget
-      python_name: napari_linum:ZarrLoader
-      title: Zarr File Loader
-    - id: napari-linum.zarr_saver_widget
-      python_name: napari_linum:ZarrSaver
-      title: Zarr File Saver
+    - id: napari-linum.zarr_reader_widget
+      python_name: napari_linum:ZarrReader
+      title: Zarr File Reader
+    - id: napari-linum.zarr_writer_widget
+      python_name: napari_linum:ZarrWriter
+      title: Zarr File Writer
   widgets:
-    - command: napari-linum.labels_layer_manipulator_widget
-      display_name: Labels Layer Manipulation Tools
-    - command: napari-linum.shapes_layer_manipulator_widget
-      display_name: Shapes Layer Manipulation Tools
-    - command: napari-linum.points_layer_manipulator_widget
-      display_name: Points Layer Manipulation Tools
+    - command: napari-linum.labels_layer_converter_widget
+      display_name: Labels Layer Converter Tools
+    - command: napari-linum.shapes_layer_converter_widget
+      display_name: Shapes Layer Converter Tools
+    - command: napari-linum.points_layer_converter_widget
+      display_name: Points Layer Converter Tools
+    - command: napari-linum.ortho_reader_widget
+      display_name: Orthophoto File Reader
     - command: napari-linum.test_widget
       display_name: Test Widget
-    - command: napari-linum.zarr_loader_widget
-      display_name: Zarr File Loader
-    - command: napari-linum.zarr_saver_widget
-      display_name: Zarr File Saver
+    - command: napari-linum.zarr_reader_widget
+      display_name: Zarr File Reader
+    - command: napari-linum.zarr_writer_widget
+      display_name: Zarr File Writer

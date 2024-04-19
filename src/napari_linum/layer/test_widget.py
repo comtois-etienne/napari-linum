@@ -3,14 +3,14 @@ from typing import TYPE_CHECKING
 from magicgui.widgets import CheckBox, Container, create_widget, PushButton
 import numpy as np
 
-from .manipulator import LayerManipulator
+from .converter import LayerConverter
 
 
 if TYPE_CHECKING:
     import napari
 
 
-class TestWidget(LayerManipulator):
+class TestWidget(LayerConverter):
 
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)

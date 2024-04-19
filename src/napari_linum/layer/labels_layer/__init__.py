@@ -1,4 +1,4 @@
-from .manipulator import LabelsLayerManipulator
+from .converter import LabelsLayerConverter
 
 
-__all__ = ["LabelsLayerManipulator"]
+__all__ = ["LabelsLayerConverter"]

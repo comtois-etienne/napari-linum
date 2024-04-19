@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from magicgui.widgets import CheckBox, Container, create_widget, PushButton
 import numpy as np
 
-from ..manipulator import LayerManipulator
+from ..converter import LayerConverter
 
 from ..layer_utils import (
     binarize_array,
@@ -16,7 +16,7 @@ if TYPE_CHECKING:
     import napari
 
 
-class LabelsLayerManipulator(LayerManipulator):
+class LabelsLayerConverter(LayerConverter):
 
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)

@@ -14,7 +14,7 @@ def get_revert_button_text(last_action):
     return f"< Revert '{last_action}' >"
 
 
-class LayerManipulator(LinumWidget):
+class LayerConverter(LinumWidget):
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
         

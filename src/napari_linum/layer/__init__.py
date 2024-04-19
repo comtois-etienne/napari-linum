@@ -1,13 +1,13 @@
-from .labels_layer import LabelsLayerManipulator
-from .shapes_layer import ShapesLayerManipulator
-from .points_layer import PointsLayerManipulator
+from .labels_layer import LabelsLayerConverter
+from .shapes_layer import ShapesLayerConverter
+from .points_layer import PointsLayerConverter
 from .test_widget import TestWidget
 
 
 __all__ = (
-    "LabelsLayerManipulator",
-    "ShapesLayerManipulator",
-    "PointsLayerManipulator",
+    "LabelsLayerConverter",
+    "ShapesLayerConverter",
+    "PointsLayerConverter",
     "TestWidget",
 )
 

@@ -45,5 +45,6 @@ class LinumWidget(Container):
     
     def _on_refresh(self):
         # to be implemented by subclass
+        self._update_message("Nothing to refresh")
         pass
 

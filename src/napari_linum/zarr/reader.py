@@ -6,20 +6,13 @@ import numpy as np
 from os import path
 
 from ..widget import LinumWidget
+from ..utils import get_name, get_extension
 
 if TYPE_CHECKING:
     import napari
 
 
-def get_name(fpath):
-    return path.basename(fpath).split(".")[0]
-
-
-def get_extension(fpath):
-    return str(path.basename(fpath).split(".")[-1]).lower()
-
-
-class ZarrLoader(LinumWidget):
+class ZarrReader(LinumWidget):
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
         self._zarr_path = FileEdit(label="Zarr Path", mode='d')

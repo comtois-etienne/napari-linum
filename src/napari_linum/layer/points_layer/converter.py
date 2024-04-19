@@ -1,25 +1,24 @@
 from typing import TYPE_CHECKING
 
 from magicgui.widgets import PushButton
-import numpy as np
 
-from ..manipulator import LayerManipulator
+from ..converter import LayerConverter
 
 from ..layer_utils import (
-    shapes_to_labels,
-    add_labels,
+    add_points_to_labels,
+    reindex_labels,
 )
 
 if TYPE_CHECKING:
     import napari
 
 
-class ShapesLayerManipulator(LayerManipulator):
+class PointsLayerConverter(LayerConverter):
 
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
 
-        self._source_layer.annotation = "napari.layers.Shapes"
+        self._source_layer.annotation = "napari.layers.Points"
         self._output_layer.annotation = "napari.layers.Layer"
 
         self._rasterize_button = PushButton(text="Rasterize")
@@ -38,7 +37,10 @@ class ShapesLayerManipulator(LayerManipulator):
             "Output must be a Labels layer"): 
             return
         self._save_data('Rasterize')
-        raster = shapes_to_labels(self._viewer, self._source_layer.value)
-        result = add_labels(raster, self._output_layer.value.data)
+        result = add_points_to_labels(
+            self._source_layer.value.data, 
+            self._output_layer.value.data
+        )
+        result = reindex_labels(result)
         self._save_output(result)
 

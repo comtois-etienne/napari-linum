@@ -49,7 +49,7 @@ def compress_zarr(zarr_arr, method):
     return zarr.array(zarr_arr, compressor=compressor)
 
 
-class ZarrSaver(LinumWidget):
+class ZarrWriter(LinumWidget):
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
 

@@ -1,4 +1,4 @@
-from .manipulator import ShapesLayerManipulator
+from .converter import ShapesLayerConverter
 
 
-__all__ = ["ShapesLayerManipulator"]
+__all__ = ["ShapesLayerConverter"]
