@@ -23,7 +23,7 @@ class ZarrReader(LinumWidget):
             choices=["data", "labels"],
             value="data",
         )
-
+        self._ignore_button = CheckBox(label="Ignore Resolution", value=False)
         self._load_data_button = PushButton(text="Open Zarr File")
         self._load_data_button.changed.connect(self._load)
 
@@ -32,12 +32,17 @@ class ZarrReader(LinumWidget):
                 self._zarr_path,
                 self._type,
                 self._resolution,
+                self._ignore_button,
                 self._load_data_button,
             ]
         )
 
     def _scale(self):
-        return [self._resolution.value] * 3
+        return [self._resolution.value] * 3 if not self._ignore_button.value else None
+    
+    def _add_scale_bar(self):
+        self._viewer.scale_bar.visible = True
+        self._viewer.scale_bar.unit = "um"
 
     def _load(self):
         self._clear_message()
@@ -58,9 +63,8 @@ class ZarrReader(LinumWidget):
             print(e)
             self._update_message('Error loading Zarr Data')
             return
-
-        self._viewer.scale_bar.visible = True
-        self._viewer.scale_bar.unit = "um"
+        if not self._ignore_button.value:
+            self._add_scale_bar()
 
     def _open_omezarr_data(self):
         root = zarr.open(self._zarr_path.value, mode="r")
