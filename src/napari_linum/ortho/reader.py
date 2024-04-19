@@ -33,6 +33,8 @@ class OrthoReader(LinumWidget):
 
     def _open_ortho(self):
         img = iio.imread(self._path_input.value)
+        # keep the first 3 channels
+        img = img[..., :3]
         self._viewer.add_image(img, name=get_name(self._path_input.value))
 
     def _load(self):
