@@ -49,6 +49,11 @@ def add_points_to_labels(points, labels):
     return labels
 
 
+def labels_to_points(labels):
+    points = np.argwhere(labels)
+    return points
+
+
 def get_layer_type(layer):
     return type(layer).__name__.lower().split('.')[-1]
 

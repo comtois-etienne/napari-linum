@@ -10,6 +10,7 @@ from ..layer_utils import (
     label_array,
     reindex_labels,
     add_labels,
+    labels_to_points,
 )
 
 if TYPE_CHECKING:
@@ -22,7 +23,7 @@ class LabelsLayerConverter(LayerConverter):
         super().__init__(viewer)
 
         self._source_layer.annotation = "napari.layers.Labels"
-        self._output_layer.annotation = "napari.layers.Labels"
+        # self._output_layer.annotation = "napari.layers.Labels"
 
         self._binarize_button = PushButton(text="Binarize")
         self._binarize_button.changed.connect(self._binarize)
@@ -36,12 +37,16 @@ class LabelsLayerConverter(LayerConverter):
         self._transfer_labels_button = PushButton(text="Transfer Labels")
         self._transfer_labels_button.changed.connect(self._transfer_labels)
 
+        self._conver_to_points_button = PushButton(text="Convert to Points")
+        self._conver_to_points_button.changed.connect(self._to_points)
+
         self.extend(
             [
                 self._binarize_button,
                 self._auto_label_button,
                 self._reindex_button,
                 self._transfer_labels_button,
+                self._conver_to_points_button,
             ]
         )
 
@@ -73,4 +78,11 @@ class LabelsLayerConverter(LayerConverter):
         output_layer_data = self._output_layer.value.data
         new_arr = add_labels(source_layer_data, output_layer_data)
         self._save_output(new_arr)
+
+    # action method
+    def _to_points(self):
+        self._save_data('Convert to Points')
+        array = self._source_layer.value.data
+        points = labels_to_points(array)
+        self._save_output(points)
 
