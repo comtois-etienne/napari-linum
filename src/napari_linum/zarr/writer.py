@@ -3,10 +3,8 @@ from typing import TYPE_CHECKING
 from magicgui.widgets import CheckBox, create_widget, PushButton, EmptyWidget, Label, FileEdit, FloatSpinBox, Select, ComboBox
 import zarr
 import numcodecs
-import numpy as np
 import os
 from os import path
-from napari.layers import Image, Labels
 
 from linumpy.io.zarr import save_zarr
 
