@@ -27,6 +27,12 @@ contributions:
     - id: napari-linum.zarr_writer_widget
       python_name: napari_linum:ZarrWriter
       title: Zarr File Writer
+    - id: napari-linum.npz_reader_widget
+      python_name: napari_linum:NpzReader
+      title: Numpy File Reader
+    - id: napari-linum.npz_writer_widget
+      python_name: napari_linum:NpzWriter
+      title: Numpy File Writer
   widgets:
     - command: napari-linum.labels_layer_converter_widget
       display_name: Labels Layer Converter Tools
@@ -42,3 +48,7 @@ contributions:
       display_name: Zarr File Reader
     - command: napari-linum.zarr_writer_widget
       display_name: Zarr File Writer
+    - command: napari-linum.npz_reader_widget
+      display_name: Numpy File Reader
+    - command: napari-linum.npz_writer_widget
+      display_name: Numpy File Writer

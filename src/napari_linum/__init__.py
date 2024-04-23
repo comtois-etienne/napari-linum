@@ -16,6 +16,11 @@ from .ortho import (
     OrthoReader,
 )
 
+from .npz import (
+    NpzReader,
+    NpzWriter,
+)
+
 __all__ = (
     "LabelsLayerConverter",
     "ShapesLayerConverter",
@@ -24,4 +29,6 @@ __all__ = (
     "TestWidget",
     "ZarrReader",
     "ZarrWriter",
+    "NpzReader",
+    "NpzWriter",
 )
