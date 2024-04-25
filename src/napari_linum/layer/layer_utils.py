@@ -43,9 +43,16 @@ def add_labels(source_layer: np.array, output_layer: np.array):
 
 
 def add_points_to_labels(points, labels):
+    dim = np.ndim(labels)
     points = np.round(points).astype(int)
     current = np.max(labels) + 1
-    labels[points[:, 0], points[:, 1]] = np.arange(current, current + len(points))
+    arranges = np.arange(current, current + len(points))
+    if dim == 2:
+        labels[points[:, 0], points[:, 1]] = arranges
+    elif dim == 3:
+        labels[points[:, 0], points[:, 1], points[:, 2]] = arranges
+    elif dim == 4:
+        labels[points[:, 0], points[:, 1], points[:, 2], points[:, 3]] = arranges
     return labels
 
 
@@ -56,6 +63,13 @@ def labels_to_points(labels):
 
 def get_layer_type(layer):
     return type(layer).__name__.lower().split('.')[-1]
+
+
+def is_instance(layer, layer_type):
+    layer_class = getattr(napari.layers, layer_type.capitalize(), None)
+    if layer_class is not None:
+        return isinstance(layer, layer_class)
+    return False
 
 
 def get_layers(viewer: napari.Viewer, layer_types: list = ['image', 'labels', 'points', 'shapes', 'surface', 'tracks', 'vectors']):

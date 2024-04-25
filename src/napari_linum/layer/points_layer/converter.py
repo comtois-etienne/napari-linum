@@ -7,6 +7,7 @@ from ..converter import LayerConverter
 from ..layer_utils import (
     add_points_to_labels,
     reindex_labels,
+    is_instance,
 )
 
 if TYPE_CHECKING:
@@ -33,7 +34,7 @@ class PointsLayerConverter(LayerConverter):
     # action method
     def _resterize(self):
         if self._usage_error(
-            (str(self._output_layer.value) != 'Labels'), 
+            (not is_instance(self._output_layer.value, 'labels')), 
             "Output must be a Labels layer"): 
             return
         self._save_data('Rasterize')
@@ -41,6 +42,6 @@ class PointsLayerConverter(LayerConverter):
             self._source_layer.value.data, 
             self._output_layer.value.data
         )
-        result = reindex_labels(result)
+        # result = reindex_labels(result)
         self._save_output(result)
 
