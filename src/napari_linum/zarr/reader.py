@@ -16,7 +16,15 @@ class ZarrReader(LinumWidget):
     def __init__(self, viewer: "napari.viewer.Viewer"):
         super().__init__(viewer)
         self._zarr_path = FileEdit(label="Zarr Path", mode='d')
-        self._resolution = FloatSpinBox(label="Resolution (um)", value=10.0)
+        self._zarr_path.changed.connect(self._path_changed)
+
+        self._resolution_z = FloatSpinBox(label="Z Resolution (um)", value=10.0, min=0.1, max=1000.0)
+        self._resolution_y = FloatSpinBox(label="Y Resolution (um)", value=10.0, min=0.1, max=1000.0)
+        self._resolution_x = FloatSpinBox(label="X Resolution (um)", value=10.0, min=0.1, max=1000.0)
+        self._resolution_z.changed.connect(self._same_button_changed)
+
+        self._same_button = CheckBox(label="Same Resolution", value=True)
+        self._same_button.changed.connect(self._same_button_changed)
 
         self._type = ComboBox(
             label="Type",
@@ -24,21 +32,62 @@ class ZarrReader(LinumWidget):
             value="data",
         )
         self._ignore_button = CheckBox(label="Ignore Resolution", value=False)
+        self._ignore_button.changed.connect(self._ignore_button_changed)
+
         self._load_data_button = PushButton(text="Open Zarr File")
         self._load_data_button.changed.connect(self._load)
+
+        self._ignore_button_changed()
 
         self.extend(
             [
                 self._zarr_path,
                 self._type,
-                self._resolution,
+                self._resolution_z,
+                self._resolution_y,
+                self._resolution_x,
+                self._same_button,
                 self._ignore_button,
                 self._load_data_button,
             ]
         )
 
+    def _same_button_changed(self):
+        if self._same_button.value:
+            self._resolution_y.value = self._resolution_z.value
+            self._resolution_x.value = self._resolution_z.value
+        self._resolution_y.enabled = (not self._ignore_button.value) and (not self._same_button.value)
+        self._resolution_x.enabled = (not self._ignore_button.value) and (not self._same_button.value)
+
+    def _ignore_button_changed(self):
+        if self._ignore_button.value:
+            self._resolution_z.enabled = False
+            self._resolution_y.enabled = False
+            self._resolution_x.enabled = False
+            self._same_button.enabled = False
+        else:
+            self._same_button.enabled = True
+            self._resolution_z.enabled = True
+            self._same_button_changed()
+
+    def _path_changed(self):
+        ext = get_extension(self._zarr_path.value)
+        if ext == 'omezarr':
+            self._type.value = "data"
+            self._type.enabled = False
+            self._resolution_z.enabled = False
+            self._resolution_y.enabled = False
+            self._resolution_x.enabled = False
+            self._ignore_button.enabled = False
+            self._same_button.enabled = False
+        else:
+            self._type.enabled = True
+            self._ignore_button.enabled = True
+            self._same_button.enabled = True
+            self._ignore_button_changed()
+
     def _scale(self):
-        return [self._resolution.value] * 3 if not self._ignore_button.value else None
+        return [self._resolution_z.value, self._resolution_y.value, self._resolution_x.value] if not self._ignore_button.value else None
     
     def _add_scale_bar(self):
         self._viewer.scale_bar.visible = True
@@ -76,7 +125,7 @@ class ZarrReader(LinumWidget):
             self._zarr_path.value, 
             plugin='napari-ome-zarr', 
             name=get_name(self._zarr_path.value), 
-            scale=self._scale(),
+            # scale=self._scale(),
             colormap="magma",
             contrast_limits=[imin, imax]
         )
