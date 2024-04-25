@@ -43,10 +43,10 @@ class NpzReader(LinumWidget):
             self._update_message('Error loading file')
 
     def _load_labels(self):
-        data = read_numpy_data(self._file_path.value)
+        data, _ = read_numpy_data(self._file_path.value)
         self._viewer.add_labels(data, name=get_name(self._file_path.value))
 
     def _load_data(self):
-        data = read_numpy_data(self._file_path.value)
+        data, _ = read_numpy_data(self._file_path.value)
         self._viewer.add_image(data, name=get_name(self._file_path.value))
 
