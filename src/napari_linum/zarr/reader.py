@@ -7,6 +7,7 @@ from os import path
 
 from ..widget import LinumWidget
 from ..utils import get_name, get_extension
+from ..layer.layer_utils import get_layer_by_name
 
 if TYPE_CHECKING:
     import napari
@@ -121,13 +122,20 @@ class ZarrReader(LinumWidget):
         imin = root[n_scales-1][:].min()
         imax = np.percentile(root[n_scales-1][:], 99.9)
 
+        name = get_name(self._zarr_path.value)
         self._viewer.open(
             self._zarr_path.value, 
             plugin='napari-ome-zarr', 
-            name=get_name(self._zarr_path.value), 
+            name=name, 
             colormap="magma",
             contrast_limits=[imin, imax]
         )
+
+        scale = get_layer_by_name(self._viewer, name).scale
+        self._resolution_z.value = scale[0]
+        self._resolution_y.value = scale[1]
+        self._resolution_x.value = scale[2]
+
 
     def _open_zarr_data(self):
         self._viewer.add_image(
