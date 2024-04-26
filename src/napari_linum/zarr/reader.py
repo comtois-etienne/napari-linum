@@ -125,7 +125,6 @@ class ZarrReader(LinumWidget):
             self._zarr_path.value, 
             plugin='napari-ome-zarr', 
             name=get_name(self._zarr_path.value), 
-            # scale=self._scale(),
             colormap="magma",
             contrast_limits=[imin, imax]
         )

@@ -132,10 +132,6 @@ class ZarrWriter(LinumWidget):
 
     def _save_omezarr(self):
         data = get_layer_by_name(self._viewer, self._source_layer.value).data
-        resolution = self._source_layer.value.scale[0]
-        scales = [resolution * 1e-3] * 3  # convert to mm
+        scales = self._source_layer.value.scale
         save_zarr(data, self._save_path, scales=scales, overwrite=self._overwrite.value)
-
-    # def _save_linumzarr(self):
-        
 
