@@ -4,7 +4,7 @@ from .layer import (
     LabelsLayerConverter,
     ShapesLayerConverter,
     PointsLayerConverter,
-    TestWidget,
+    PointsLayerVolume,
 )
 
 from .zarr import (
@@ -25,8 +25,8 @@ __all__ = (
     "LabelsLayerConverter",
     "ShapesLayerConverter",
     "PointsLayerConverter",
+    "PointsLayerVolume",
     "OrthoReader",
-    "TestWidget",
     "ZarrReader",
     "ZarrWriter",
     "NpzReader",

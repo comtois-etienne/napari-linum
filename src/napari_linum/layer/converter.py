@@ -49,8 +49,8 @@ class LayerConverter(LinumWidget):
                 self._output_layer,
                 self._revert_button,
                 self._allow_revert,
-                self._spacer,
                 self._hide_source_layer,
+                self._spacer,
             ]
         )
 

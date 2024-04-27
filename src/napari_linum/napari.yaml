@@ -15,12 +15,12 @@ contributions:
     - id: napari-linum.points_layer_converter_widget
       python_name: napari_linum:PointsLayerConverter
       title: Points Layer Converter Tools
+    - id: napari-linum.points_layer_volume_widget
+      python_name: napari_linum:PointsLayerVolume
+      title: Volume from points
     - id: napari-linum.ortho_reader_widget
       python_name: napari_linum:OrthoReader
       title: Orthophoto Reader
-    - id: napari-linum.test_widget
-      python_name: napari_linum:TestWidget
-      title: Test Widget
     - id: napari-linum.zarr_reader_widget
       python_name: napari_linum:ZarrReader
       title: Zarr File Reader
@@ -40,10 +40,10 @@ contributions:
       display_name: Shapes Layer Converter Tools
     - command: napari-linum.points_layer_converter_widget
       display_name: Points Layer Converter Tools
+    - command: napari-linum.points_layer_volume_widget
+      display_name: Annotation Volume Tools
     - command: napari-linum.ortho_reader_widget
       display_name: Orthophoto File Reader
-    - command: napari-linum.test_widget
-      display_name: Test Widget
     - command: napari-linum.zarr_reader_widget
       display_name: Zarr File Reader
     - command: napari-linum.zarr_writer_widget
