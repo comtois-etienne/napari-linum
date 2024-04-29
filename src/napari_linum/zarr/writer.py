@@ -19,6 +19,9 @@ if TYPE_CHECKING:
     import napari
 
 
+ALL = "all images and labels"
+
+
 def is_dir_empty(directory, ignore_hidden=True):
     if not path.exists(directory):
         return True
@@ -53,8 +56,8 @@ class ZarrWriter(LinumWidget):
 
         self._source_layer = ComboBox(
             label="Source",
-            choices=["all"] + get_layers(viewer, ["image", "labels"]),
-            value="all",
+            choices=[ALL] + get_layers(viewer, ["image", "labels"]),
+            value=ALL,
         )
         self._zarr_path = FileEdit(label="Save Directory", mode='d')
         self._save_path = None
@@ -62,8 +65,9 @@ class ZarrWriter(LinumWidget):
         self._format = ComboBox(
             label="Format",
             choices=["zarr", "omezarr"],
-            value="zarr",
+            value="omezarr",
         )
+        self._format.changed.connect(self._on_refresh)
 
         self._compression = ComboBox(
             label="Compression",
@@ -88,7 +92,10 @@ class ZarrWriter(LinumWidget):
         )
 
     def _on_refresh(self):
-        self._source_layer.choices = ["all"] + get_layers(self._viewer, ["image", "labels"])
+        if self._format.value == "omezarr":
+            self._source_layer.choices = [ALL] + get_layers(self._viewer, ["image"])
+        else:
+            self._source_layer.choices = get_layers(self._viewer, ["image", "labels"])
 
     def _update_path(self):
         layer_name = str(self._source_layer.value)
