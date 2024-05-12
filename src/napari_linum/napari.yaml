@@ -33,6 +33,9 @@ contributions:
     - id: napari-linum.npz_writer_widget
       python_name: napari_linum:NpzWriter
       title: Numpy File Writer
+    - id: napari-linum.slice_reader_widget
+      python_name: napari_linum:SliceReader
+      title: Images Slices Reader
   widgets:
     - command: napari-linum.labels_layer_converter_widget
       display_name: Labels Layer Converter Tools
@@ -52,3 +55,5 @@ contributions:
       display_name: Numpy File Reader
     - command: napari-linum.npz_writer_widget
       display_name: Numpy File Writer
+    - command: napari-linum.slice_reader_widget
+      display_name: Images Slices Reader

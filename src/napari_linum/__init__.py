@@ -21,6 +21,10 @@ from .npz import (
     NpzWriter,
 )
 
+from .slice import (
+    SliceReader,
+)
+
 __all__ = (
     "LabelsLayerConverter",
     "ShapesLayerConverter",
@@ -31,4 +35,5 @@ __all__ = (
     "ZarrWriter",
     "NpzReader",
     "NpzWriter",
+    "SliceReader",
 )
