@@ -35,6 +35,7 @@ dependencies:
   # - cookiecutter
   # - linumpy
   # - napari-linum
+  # - liom-toolkit
 prefix: /Applications/anaconda3/envs/napari_linum
 
 # to install napari-linum plugin
