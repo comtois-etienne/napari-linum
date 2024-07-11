@@ -36,6 +36,9 @@ contributions:
     - id: napari-linum.slice_reader_widget
       python_name: napari_linum:SliceReader
       title: Images Slices Reader
+    - id: napari-linum.ras_widget
+      python_name: napari_linum:Ras
+      title: RAS reorientation
   widgets:
     - command: napari-linum.labels_layer_converter_widget
       display_name: Labels Layer Converter Tools
@@ -57,3 +60,5 @@ contributions:
       display_name: Numpy File Writer
     - command: napari-linum.slice_reader_widget
       display_name: Images Slices Reader
+    - command: napari-linum.ras_widget
+      display_name: RAS reorientation

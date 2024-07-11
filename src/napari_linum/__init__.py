@@ -25,6 +25,9 @@ from .slice import (
     SliceReader,
 )
 
+from .ras import Ras
+
+
 __all__ = (
     "LabelsLayerConverter",
     "ShapesLayerConverter",
@@ -36,4 +39,5 @@ __all__ = (
     "NpzReader",
     "NpzWriter",
     "SliceReader",
+    "Ras",
 )
